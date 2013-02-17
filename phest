@@ -1,0 +1,6 @@
+#!/usr/bin/env php
+<?php
+    require dirname(__FILE__).'/lib/Phest/Runner/Console.php';
+
+    $tester = new Phest_Runner_Console();
+    $tester->runTests();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" stopOnFailure="false">
+    <php>
+        <includePath>./lib</includePath>
+    </php>
+    <logging>
+        <log
+            type="coverage-html"
+            target="coverage"
+            charset="utf-8" />
+    </logging>
+    <testsuites>
+        <testsuite name="core">
+            <directory suffix=".php">tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
