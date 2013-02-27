@@ -1,5 +1,6 @@
 <?php
     require_once dirname(__FILE__).'/../../Assert.php';
+    require_once dirname(__FILE__).'/../../Exception.php';
 
     class Phest_Assert_That_Is extends Phest_Assert {
 

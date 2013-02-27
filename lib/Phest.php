@@ -1,25 +1,12 @@
 <?php
-    require_once dirname(__FILE__).'/Phest/Report/Console.php';
+    require_once dirname(__FILE__).'/Phest/Assert/That.php';
+    require_once dirname(__FILE__).'/Phest/Assert/That/Is.php';
+    require_once dirname(__FILE__).'/Phest/Subtest.php';
+
+    define("VERSION", "0.01");
 
     class Phest {
-
-        private static $instance = NULL;
-
-        private $reporter;
-
-        public static function getInstance() {
-            if (is_null(static::$instance)) {
-                static::$instance = new Phest();
-            }
-
-            return static::$instance;
-        }
-
-        private function __construct() {
-            $this->reporter = new Phest_Report_Console();
-        }
-
-        public function getReporter() {
-            return $this->reporter;
+        public static function getVersion() {
+            return VERSION;
         }
     }

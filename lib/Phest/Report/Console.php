@@ -1,26 +1,45 @@
 <?php
     require_once 'Console/Color2.php';
+    require_once dirname(__FILE__).'/../Report.php';
 
-    class Phest_Report_Console {
+    class Phest_Report_Console extends Phest_Report {
 
+        private $tester;
         private $color;
-        private $testCount;
 
-        public function __construct() {
+        public function __construct($tester) {
+            $this->tester = $tester;
             $this->color = new Console_Color2();
         }
 
+        public function write($str) {
+            echo $this->color($str), "\n";
+        }
+
         public function report($testSuccessful, Phest_Exception $e = NULL) {
-            $this->testCount++;
+            $this->tester->increment();
 
-            if ($testSuccessful === true) {
-                print $this->color->convert("%bOK {$this->testCount}")."\n";
-            } else {
-                print $this->color->convert("%rNOT OK {$this->testCount}")."\n";
+            $testSuccessful === true ? $this->report_pass() : $this->report_fail($e);
+        }
 
-                if (!is_null($e)) {
-                    print "\t".$e->getMessage()."\n";
-                }
+        private function report_pass() {
+            echo $this->color("%b{$this->tester->getCount()} OK%n"), "\n";
+        }
+
+        private function report_fail(Phest_Exception $e) {
+            if (is_null($e)) {
+                throw new Phest_Exception('unknown error');
             }
+
+            $this->color("%r{$this->tester->getCount()} NOT OK");
+            $this->color("\tline:{$e->getLine()} {$e->getMessage()}%n");
+        }
+
+        private function color($str) {
+            if (empty($str)) {
+                throw new Phest_Exception('text is empty');
+            }
+
+            echo $this->color->convert($str);
         }
     }

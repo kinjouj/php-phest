@@ -12,8 +12,6 @@
 
                 parent::report(true);
             } catch (Phest_Exception $e) {
-                var_dump($e->getLine());
-
                 parent::report(false, $e);
             }
         }

@@ -1,13 +1,5 @@
 <?php
-    class Phest_Report {
-
-        private $message;
-
-        public function __construct($message) {
-            $this->message = $message;
-        }
-
-        public function getMessage() {
-            return $this->message;
-        }
+    abstract class Phest_Report {
+        abstract function __construct($tester);
+        abstract function write($str);
     }
