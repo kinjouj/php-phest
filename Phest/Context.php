@@ -4,8 +4,8 @@
     class Phest_Context {
 
         private $reporter = null;
-        private $subtests = [];
         private $testCount = 0;
+        private $subtests = [];
 
         private static $instance;
 
@@ -15,16 +15,21 @@
 
         public static function getInstance() {
             if (is_null(static::$instance)) {
-                static::newInstance();
+                static::$instance = new Phest_Context();
             }
 
             return static::$instance;
         }
 
-        public static function newInstance() {
+        public static function newInstance($isSubtest = false) {
             static::$instance = new Phest_Context();
 
+
             return static::$instance;
+        }
+
+        public static function setInstance(Phest_Context $instance) {
+            static::$instance = $instance;
         }
 
         public function run($test) {
@@ -37,37 +42,44 @@
             }
 
             $reporter = $this->getReporter();
-            $reporter->write("--- {$test}");
+            $reporter->write("--- {$test}\n");
 
-            ob_start();
             include $test;
-            $testDetail = ob_get_contents();
-            ob_end_clean();
-
-            $reporter->write("1..{$this->getCount()}");
-            $reporter->write($testDetail);
         }
 
         public function getReporter() {
             return $this->reporter;
         }
 
-        public function increment() {
-            $this->testCount++;
+        public function getCount() {
+            return $this->testCount;
         }
 
-        public function getCount() {
-            $subtestCount = array_reduce(
-                $this->subtests,
-                function ($x, $y) {
-                    return $y->getCount();
-                }
-            );
-
-            return $this->testCount + $subtestCount;
+        public function incrementCount() {
+            return ++$this->testCount;
         }
 
         public function addSubtest($ctx) {
             $this->subtests[] = $ctx;
+        }
+
+        public function getCountByAll() {
+            $nums = $this->testCount;
+
+            foreach ($this->subtests as $subtest) {
+                $nums += $this->getCountBySubtest($subtest);
+            }
+
+            return $nums;
+        }
+
+        public function getCountBySubtest($testContext) {
+            $nums = $testContext->testCount;
+
+            foreach ($testContext->subtests as $subtest) {
+                $nums += $this->getCountBySubtest($subtest);
+            }
+
+            return $nums;
         }
     }

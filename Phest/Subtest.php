@@ -6,10 +6,16 @@
             }
 
             $ctx = Phest_Context::getInstance();
-            $ctx->addSubtest(Phest_Context::newInstance(null));
-            $ctx->getReporter()->write("%g--- $comment%n");
+
+            $ctxSubtest = Phest_Context::newInstance();
+            $reporter = $ctxSubtest->getReporter();
+            $reporter->write("%g--- $comment%n\n");
+            $reporter->indentLevel++;
 
             $cb();
+
+            $ctx->addSubtest($ctxSubtest);
+            Phest_Context::setInstance($ctx);
         }
     }
 

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" stopOnFailure="false">
+<phpunit colors="true" stopOnFailure="true">
     <php>
-        <includePath>./lib</includePath>
+        <includePath>.</includePath>
     </php>
+
     <logging>
         <log
             type="coverage-html"
             target="coverage"
             charset="utf-8" />
     </logging>
+
     <filter>
         <blacklist>
             <file>tests/class.php</file>
         </blacklist>
     </filter>
+
     <testsuites>
         <testsuite name="core">
             <directory suffix=".php">tests</directory>

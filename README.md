@@ -10,4 +10,7 @@
         assertThat('A', is('A'));
         assertThat('B', is('B'));
 
+        subtest('subtest1', function() {
+            assertThat('A', is('A'));
+        });
     ?>
