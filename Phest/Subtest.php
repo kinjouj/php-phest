@@ -15,6 +15,7 @@
             $cb();
 
             $ctx->addSubtest($ctxSubtest);
+
             Phest_Context::setInstance($ctx);
         }
     }

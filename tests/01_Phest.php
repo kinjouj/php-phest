@@ -42,7 +42,7 @@
             $this->assertTrue($matcher->evaluate(null));
 
             $this->setExpectedException('Phest_Exception', 'value isn`t a null');
-            $this->assertFalse($matcher->evaluate(new stdClass));
+            $matcher->evaluate(new stdClass);
         }
 
         public function test_function_notNullValue() {

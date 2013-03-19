@@ -1,4 +1,5 @@
 <?php
+    require_once dirname(__FILE__).'/Exception.php';
     require_once dirname(__FILE__).'/Report/Console.php';
 
     class Phest_Context {
@@ -15,15 +16,14 @@
 
         public static function getInstance() {
             if (is_null(static::$instance)) {
-                static::$instance = new Phest_Context();
+                self::setInstance(new Phest_Context());
             }
 
             return static::$instance;
         }
 
-        public static function newInstance($isSubtest = false) {
-            static::$instance = new Phest_Context();
-
+        public static function newInstance() {
+            self::setInstance(new Phest_Context());
 
             return static::$instance;
         }
@@ -59,25 +59,25 @@
             return ++$this->testCount;
         }
 
-        public function addSubtest($ctx) {
-            $this->subtests[] = $ctx;
+        public function &getSubtests() {
+            if (!is_array($this->subtests)) {
+                throw new Phest_Exception('subtests isn`t a array');
+            }
+
+            return $this->subtests;
+        }
+
+        public function addSubtest(Phest_Context $ctx) {
+            $subtests = &$this->getSubtests();
+            $subtests[] = $ctx;
         }
 
         public function getCountByAll() {
             $nums = $this->testCount;
+            $subtests = $this->getSubtests();
 
-            foreach ($this->subtests as $subtest) {
-                $nums += $this->getCountBySubtest($subtest);
-            }
-
-            return $nums;
-        }
-
-        public function getCountBySubtest($testContext) {
-            $nums = $testContext->testCount;
-
-            foreach ($testContext->subtests as $subtest) {
-                $nums += $this->getCountBySubtest($subtest);
+            foreach ($subtests as $subtest) {
+                $nums += $subtest->getCountByAll();
             }
 
             return $nums;
