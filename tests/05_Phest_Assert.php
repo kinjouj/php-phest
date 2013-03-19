@@ -1,9 +1,7 @@
 <?php
     require_once dirname(__FILE__).'/class.php';
 
-    require_once 'Phest/Assert.php';
-
-    class Phest_Assert_TestCase extends PHPUnit_Framework_TestCase {
+    class Phest_Assert_TestCase extends TestCase {
 
         public function test_getTester() {
             $this->assertTrue(
@@ -60,7 +58,7 @@
                     $assert = new Phest_Assert_Dummy();
                     $assert->getTester()->getReporter()->color = new NoColor();
 
-                    $this->expectOutputString("%b1 OK%n\n");
+                    $this->expectOutputString("%b1 OK%n\r\n");
                     $assert->report();
                 },
                 $this,

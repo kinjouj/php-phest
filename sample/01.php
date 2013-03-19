@@ -20,4 +20,6 @@
     });
 
     assertThat('B', is('B'));
+
+    plan(4);
 ?>

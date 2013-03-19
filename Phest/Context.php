@@ -82,4 +82,9 @@
 
             return $nums;
         }
+
+        public function reset() {
+            $this->testCount = 0;
+            $this->subtests = [];
+        }
     }

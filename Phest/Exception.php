@@ -1,3 +1,3 @@
 <?php
-    class Phest_Exception extends Exception {
+    class Phest_Exception extends RuntimeException {
     }

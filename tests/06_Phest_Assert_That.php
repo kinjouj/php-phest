@@ -1,8 +1,7 @@
 <?php
     require_once dirname(__FILE__).'/class.php';
-    require_once 'Phest/Assert/That.php';
 
-    class Phest_Assert_That_TestCase extends PHPUnit_Framework_TestCase {
+    class Phest_Assert_That_TestCase extends TestCase {
 
         public function setUp() {
             $cb = Closure::bind(

@@ -26,7 +26,7 @@
         }
 
         private function report_pass() {
-            echo $this->write("%b{$this->tester->incrementCount()} OK%n"), "\n";
+            echo $this->write("%b{$this->tester->incrementCount()} OK%n"), "\r\n";
 
             return true;
         }

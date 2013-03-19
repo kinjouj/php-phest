@@ -4,7 +4,7 @@
     require_once dirname(__FILE__).'/Report.php';
 
     interface Phest_Assert_Interface {
-        static function evaluate($value, Phest_Matcher $assert);
+        static function evaluate($value, Phest_Matcher $matcher);
     }
 
     abstract class Phest_Assert implements Phest_Assert_Interface {
