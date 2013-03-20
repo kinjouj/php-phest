@@ -5,15 +5,17 @@
 
     class Phest_Report_Console extends Phest_Report {
 
-        private $tester;
         private $color;
 
-        public function __construct($tester) {
-            $this->tester = $tester;
+        public function __construct() {
             $this->color = new Console_Color2();
         }
 
         public function write($text) {
+            if (!($this->color instanceof Console_Color2)) {
+                throw new Phest_Exception('color isn`t a instanceof Console_Color2');
+            }
+
             if (empty($text)) {
                 throw new Phest_Exception("text is empty");
             }
@@ -26,19 +28,21 @@
         }
 
         private function report_pass() {
-            echo $this->write("%b{$this->tester->incrementCount()} OK%n"), "\r\n";
+            echo $this->write("%b{$this->incrementCount()} OK%n"), "\r\n";
 
             return true;
         }
 
         private function report_fail(Phest_Exception $e, $line) {
-            if (is_null($e)) {
-                throw new Phest_Exception('unknown error');
-            }
-
-            $this->write("%r{$this->tester->incrementCount()} NOT OK ");
+            $this->write("%r{$this->incrementCount()} NOT OK ");
             $this->write("line:{$line} {$e->getMessage()}%n\r\n");
 
             return false;
+        }
+
+        private function incrementCount() {
+            $tester = Phest_Context::getInstance();
+
+            return $tester->incrementCount();
         }
     }

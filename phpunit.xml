@@ -15,6 +15,10 @@
         <blacklist>
             <file>tests/class.php</file>
         </blacklist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">Phest</directory>
+            <file>Phest.php</file>
+        </whitelist>
     </filter>
 
     <testsuites>

@@ -4,15 +4,11 @@
     class Phest_Assert_TestCase extends TestCase {
 
         public function test_getTester() {
-            $this->assertTrue(
-                Phest_Assert_Dummy::getTester() instanceof Phest_Context
-            );
+            $this->assertInstanceOf('Phest_Context', Phest_Assert_Dummy::getTester());
         }
 
         public function test_getReporter_pass() {
-            $this->assertTrue(
-                Phest_Assert_Dummy::getReporter() instanceof Phest_Report
-            );
+            $this->assertInstanceOf('Phest_Report', Phest_Assert_Dummy::getReporter());
         }
 
         public function test_getReporter_getTester_is_null() {
@@ -49,22 +45,19 @@
                 $this->returnValue($ctxMock)
             );
 
-            $mock::getReporter();
+            $mock::getReporter(); //thrown
         }
 
         public function test_report() {
-            $cb = Closure::bind(
+            $this->assertOutput(
                 function() {
                     $assert = new Phest_Assert_Dummy();
-                    $assert->getTester()->getReporter()->color = new NoColor();
-
-                    $this->expectOutputString("%b1 OK%n\r\n");
                     $assert->report();
                 },
-                $this,
-                'Phest_Report_Console'
+                function($output) {
+                    $this->assertThat($output, $this->equalTo('1 OK'));
+                }
             );
-            $cb();
         }
 
         public function test_getLine() {
@@ -85,9 +78,7 @@
             $this->assertThat(
                 Phest_Assert_Dummy::getLine(
                     'assertThat',
-                    array(
-                        array('function' => 'assertThat', 'line' => 30)
-                    )
+                    array(array('function' => 'assertThat', 'line' => 30))
                 ),
                 $this->equalTo(30)
             );

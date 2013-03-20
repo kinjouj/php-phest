@@ -9,4 +9,6 @@
     assertThat($sample, notNullValue());
     assertThat($sample->repeat(2), is('xx'));
     assertThat($sample->repeat(3), is("xxxxx"));
+
+    plan(3);
 ?>

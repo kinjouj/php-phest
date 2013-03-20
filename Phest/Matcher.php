@@ -1,4 +1,6 @@
 <?php
+    require_once dirname(__FILE__).'/Exception.php';
+
     class Phest_Matcher {
 
         private $evaluator;
@@ -8,8 +10,17 @@
         }
 
         public function evaluate() {
-            $evaluator = $this->evaluator;
+            if (!is_callable($this->evaluator)) {
+                throw new Phest_Exception('evaluator isn`t a callable');
+            }
 
-            return $evaluator(func_get_args());
+            $evaluator = $this->evaluator;
+            $response = $evaluator(func_get_args());
+
+            if (!is_bool($response)) {
+                throw new Phest_Exception('evaluator response isn`t a bool');
+            }
+
+            return $response;
         }
     }

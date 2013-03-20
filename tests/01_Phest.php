@@ -7,14 +7,6 @@
             $this->assertThat(Phest::getVersion(), $this->equalTo('0.1'));
         }
 
-        public function test_functions() {
-            $funcs = ['plan', 'assertThat', 'is', 'nullValue', 'notNullValue'];
-
-            foreach ($funcs as $func) {
-                $this->assertTrue(function_exists($func));
-            }
-        }
-
         public function test_function_plan() {
             $this->assertTrue(function_exists('plan'));
 
@@ -28,11 +20,27 @@
             );
         }
 
-        public function test_function_assertThat_is() {
+        public function test_function_assertThat() {
+            $this->assertTrue(function_exists('assertThat'));
+
+            $this->assertOutput(
+                function() {
+                    $this->assertTrue(assertThat(null, nullValue()));
+                },
+                function($output) {
+                    $this->assertThat($output, $this->equalTo('1 OK'));
+                }
+            );
+        }
+
+        public function test_function_is() {
             $this->assertTrue(function_exists('is'));
 
             $matcher = is('hoge');
             $this->assertTrue($matcher->evaluate('hoge'));
+
+            $this->setExpectedException('Phest_Exception', 'got fuga !== actual hoge');
+            $matcher->evaluate('fuga');
         }
 
         public function test_function_nullValue() {
@@ -49,7 +57,7 @@
             $this->assertTrue(function_exists('notNullValue'));
 
             $matcher = notNullValue();
-            $matcher->evaluate(new stdClass);
+            $this->assertTrue($matcher->evaluate(new stdClass));
 
             $this->setExpectedException('Phest_Exception', 'value is null');
             $matcher->evaluate(null);

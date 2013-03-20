@@ -11,7 +11,7 @@
         private static $instance;
 
         private function __construct() {
-            $this->reporter = new Phest_Report_Console($this);
+            $this->reporter = new Phest_Report_Console();
         }
 
         public static function getInstance() {
@@ -34,20 +34,26 @@
 
         public function run($test) {
             if (is_null($test)) {
-                return;
+                return false;
             }
 
             if (!file_exists($test)) {
-                return;
+                return false;
             }
 
             $reporter = $this->getReporter();
             $reporter->write("--- {$test}\n");
 
             include $test;
+
+            return true;
         }
 
         public function getReporter() {
+            if (!($this->reporter instanceof Phest_Report)) {
+                throw new Phest_Exception('reporter isn`t a instanceof Phest_Report');
+            }
+
             return $this->reporter;
         }
 
@@ -86,5 +92,7 @@
         public function reset() {
             $this->testCount = 0;
             $this->subtests = [];
+
+            static::$instance = null;
         }
     }
