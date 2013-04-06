@@ -1,7 +1,8 @@
 #!/usr/bin/env php
 <?php
-    require dirname(__FILE__).'/Phest.php';
-    require dirname(__FILE__).'/Phest/Runner/Console.php';
+    require 'Phest.php';
+    require 'Phest/Runner/Console.php';
 
     $tester = new Phest_Runner_Console();
     $tester->runTests();
+?>

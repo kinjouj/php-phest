@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<package version="1.0">
+    <name>phest</name>
+    <summary>PHP Simple Testing</summary>
+    <description>PHP Simple Testing Unit Framework</description>
+    <license>PHP License</license>
+    <maintainers>
+        <maintainer>
+            <user>kinjouj</user>
+            <name>Kinjou Jitsutaka</name>
+            <email>kinjouj@gmail.com</email>
+            <role>lead</role>
+        </maintainer>
+    </maintainers>
+    <release>
+        <version>0.1</version>
+        <date>2013-04-05</date>
+        <state>beta</state>
+        <notes>first beta release</notes>
+        <filelist>
+            <dir name="/" beseinstalldir="Phest">
+                <file role="php" name="Phest.php" />
+                <file role="script" name="phest" />
+                <dir name="Phest">
+                    <file role="php" name="Assert.php" />
+                    <file role="php" name="Context.php" />
+                    <file role="php" name="Exception.php" />
+                    <file role="php" name="Matcher.php" />
+                    <file role="php" name="Report.php" />
+                    <file role="php" name="Subtest.php" />
+
+                    <dir name="Assert">
+                        <file role="php" name="Plan.php" />
+                        <file role="php" name="That.php" />
+                    </dir>
+                    <dir name="Report">
+                        <file role="php" name="Console.php" />
+                    </dir>
+                    <dir name="Runner">
+                        <file role="php" name="Console.php" />
+                    </dir>
+                </dir>
+            </dir>
+        </filelist>
+    </release>
+    <deps>
+        <dep type="php" rel="ge" version="5.4.0" />
+        <dep type="pkg" rel="eq" version="0.1.2">Console_Color2</dep>
+        <dep type="pkg" rel="eq" version="1.2.0">Console_CommandLine</dep>
+    </deps>
+</package>

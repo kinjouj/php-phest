@@ -1,5 +1,6 @@
 <?php
     require_once dirname(__FILE__).'/../Assert.php';
+    require_once dirname(__FILE__).'/../Matcher.php';
 
     class Phest_Assert_Plan extends Phest_Assert {
         public static function evaluate($value, Phest_Matcher $matcher = null) {
