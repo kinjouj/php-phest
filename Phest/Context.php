@@ -1,5 +1,7 @@
 <?php
+    require_once dirname(__FILE__).'/Context.php';
     require_once dirname(__FILE__).'/Exception.php';
+    require_once dirname(__FILE__).'/Report.php';
     require_once dirname(__FILE__).'/Report/Console.php';
 
     class Phest_Context {
@@ -15,21 +17,21 @@
         }
 
         public static function getInstance() {
-            if (is_null(static::$instance)) {
+            if (is_null(self::$instance)) {
                 self::setInstance(new Phest_Context());
             }
 
-            return static::$instance;
+            return self::$instance;
         }
 
         public static function newInstance() {
             self::setInstance(new Phest_Context());
 
-            return static::$instance;
+            return self::$instance;
         }
 
         public static function setInstance(Phest_Context $instance) {
-            static::$instance = $instance;
+            self::$instance = $instance;
         }
 
         public function run($test) {
@@ -93,6 +95,7 @@
             $this->testCount = 0;
             $this->subtests = [];
 
-            static::$instance = null;
+            self::$instance = null;
         }
     }
+?>

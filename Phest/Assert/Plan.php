@@ -1,5 +1,6 @@
 <?php
     require_once dirname(__FILE__).'/../Assert.php';
+    require_once dirname(__FILE__).'/../Exception.php';
     require_once dirname(__FILE__).'/../Matcher.php';
 
     class Phest_Assert_Plan extends Phest_Assert {
@@ -9,18 +10,19 @@
                     throw new Phest_Exception('value isn`t int');
                 }
 
-                $testCount = static::getTester()->getCount();
+                $testCount = self::getTester()->getCount();
 
                 if ($testCount === $value) {
-                    return static::report();
+                    return self::report();
                 } else {
                     throw new Phest_Exception("plan got $testCount !== expected $value");
                 }
             } catch (RuntimeException $e) {
-                return static::report(
+                return self::report(
                     new Phest_Exception($e->getMessage()),
-                    static::getLine('plan')
+                    self::getLine('plan')
                 );
             }
         }
     }
+?>

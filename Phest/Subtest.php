@@ -1,4 +1,7 @@
 <?php
+    require_once dirname(__FILE__).'/Context.php';
+    require_once dirname(__FILE__).'/Exception.php';
+
     class Phest_Subtest {
         public static function runSubtest($comment, callable $cb) {
             if (empty($comment)) {
@@ -19,7 +22,4 @@
             Phest_Context::setInstance($ctx);
         }
     }
-
-    function subtest($comment, callable $cb) {
-        Phest_Subtest::runSubtest($comment, $cb);
-    }
+?>

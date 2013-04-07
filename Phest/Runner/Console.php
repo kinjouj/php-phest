@@ -1,6 +1,6 @@
 <?php
-    require_once dirname(__FILE__).'/../Context.php';
     require_once 'Console/CommandLine.php';
+    require_once dirname(__FILE__).'/../Context.php';
 
     class Phest_Runner_Console {
 
@@ -16,6 +16,7 @@
             }
 
             $reporter = Phest_Context::getInstance()->getReporter();
+            $reporter->write("\r\n");
             $reporter->write("%2");
             $reporter->write("Test: {$this->getNumTests()}, ");
             $reporter->write("Assertions: {$this->getNumAssertions()}");

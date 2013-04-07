@@ -14,23 +14,27 @@
         }
 
         public static function getReporter() {
-            $tester = static::getTester();
+            $tester = self::getTester();
 
-            if (!($tester instanceof Phest_Context)) {
-                return null;
+            if ($tester instanceof Phest_Context) {
+                $reporter = $tester->getReporter();
+
+                if ($reporter instanceof Phest_Report) {
+                    return $reporter;
+                }
             }
 
-            $reporter = $tester->getReporter();
-
-            if (!($reporter instanceof Phest_Report)) {
-                return null;
-            }
-
-            return $reporter;
+            return null;
         }
 
         public static function report(Phest_Exception $e = null, $line = 0) {
-            return static::getReporter()->report($e, $line);
+            $reporter = self::getReporter();
+
+            if (is_null($reporter)) {
+                throw new Phest_Exception('reporter is null');
+            }
+
+            return $reporter->report($e, $line);
         }
 
         public static function getLine($func_name, array $traces = []) {
@@ -45,10 +49,11 @@
             return array_reduce(
                 $traces,
                 function($a, $b) use($func_name) {
-                    if (isset($b['function']) && $b['function'] === $func_name) {
-
-                        if (isset($b['line'])) {
-                            $a = $b['line'];
+                    if (isset($b['function'])) {
+                        if ($b['function'] === $func_name) {
+                            if (isset($b['line'])) {
+                                $a = $b['line'];
+                            }
                         }
                     }
 
@@ -58,3 +63,4 @@
             );
         }
     }
+?>

@@ -1,51 +1,87 @@
 <?xml version="1.0" ?>
-<package version="1.0">
+<package
+    packagerversion="1.4.10"
+    version="2.0"
+    xmlns="http://pear.php.net/dtd/package-2.0"
+    xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+                      http://pear.php.net/dtd/tasks-1.0.xsd
+                      http://pear.php.net/dtd/package-2.0
+                      http://pear.php.net/dtd/package-2.0.xsd">
+
     <name>phest</name>
+    <channel>pear.localhost</channel>
     <summary>PHP Simple Testing</summary>
     <description>PHP Simple Testing Unit Framework</description>
+    <lead>
+        <name>Kinjou Jitsutaka</name>
+        <user>kinjouj</user>
+        <email>kinjouj@gmail.com</email>
+        <active>yes</active>
+    </lead>
+    <date>2013-04-07</date>
+    <version>
+        <release>0.0.1</release>
+        <api>0.0.1</api>
+    </version>
+    <stability>
+        <release>devel</release>
+        <api>devel</api>
+    </stability>
     <license>PHP License</license>
-    <maintainers>
-        <maintainer>
-            <user>kinjouj</user>
-            <name>Kinjou Jitsutaka</name>
-            <email>kinjouj@gmail.com</email>
-            <role>lead</role>
-        </maintainer>
-    </maintainers>
-    <release>
-        <version>0.1</version>
-        <date>2013-04-05</date>
-        <state>beta</state>
-        <notes>first beta release</notes>
-        <filelist>
-            <dir name="/" beseinstalldir="Phest">
-                <file role="php" name="Phest.php" />
-                <file role="script" name="phest" />
-                <dir name="Phest">
-                    <file role="php" name="Assert.php" />
-                    <file role="php" name="Context.php" />
-                    <file role="php" name="Exception.php" />
-                    <file role="php" name="Matcher.php" />
-                    <file role="php" name="Report.php" />
-                    <file role="php" name="Subtest.php" />
+    <notes>http://github.com/kinjouj/php-phest/blob/master/README.md</notes>
+    <contents>
+        <dir name="/" beseinstalldir="Phest">
+            <file role="php" name="Phest.php" />
+            <file role="script" name="phest" />
+            <dir name="Phest">
+                <file role="script" name="autoload.php" />
+                <file role="php" name="Assert.php" />
+                <file role="php" name="Context.php" />
+                <file role="php" name="Exception.php" />
+                <file role="php" name="Matcher.php" />
+                <file role="php" name="Report.php" />
+                <file role="php" name="Subtest.php" />
 
-                    <dir name="Assert">
-                        <file role="php" name="Plan.php" />
-                        <file role="php" name="That.php" />
-                    </dir>
-                    <dir name="Report">
-                        <file role="php" name="Console.php" />
-                    </dir>
-                    <dir name="Runner">
-                        <file role="php" name="Console.php" />
-                    </dir>
+                <dir name="Assert">
+                    <file role="php" name="Plan.php" />
+                    <file role="php" name="That.php" />
+                </dir>
+
+                <dir name="Report">
+                    <file role="php" name="Console.php" />
+                </dir>
+
+                <dir name="Runner">
+                    <file role="php" name="Console.php" />
                 </dir>
             </dir>
+        </dir>
+    </contents>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.4.13</min>
+            </php>
+            <pearinstaller>
+                <min>1.9.4</min>
+            </pearinstaller>
+            <package>
+                <name>Console_Color2</name>
+                <channel>pear.php.net</channel>
+                <min>0.1.2</min>
+            </package>
+            <package>
+                <name>Console_CommandLine</name>
+                <channel>pear.php.net</channel>
+                <min>1.2.0</min>
+            </package>
+        </required>
+    </dependencies>
+    <phprelease>
+        <filelist>
+            <install as="phest" name="phest" />
         </filelist>
-    </release>
-    <deps>
-        <dep type="php" rel="ge" version="5.4.0" />
-        <dep type="pkg" rel="eq" version="0.1.2">Console_Color2</dep>
-        <dep type="pkg" rel="eq" version="1.2.0">Console_CommandLine</dep>
-    </deps>
+    </phprelease>
 </package>

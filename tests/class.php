@@ -1,6 +1,5 @@
 <?php
-    require_once 'Phest.php';
-    require_once 'Console/Color2.php';
+    require_once 'Phest/autoload.php';
 
     abstract class TestCase extends PHPUnit_Framework_TestCase {
 

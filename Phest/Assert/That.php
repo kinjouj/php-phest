@@ -7,12 +7,13 @@
             try {
                 $matcher->evaluate($value);
 
-                return static::report();
+                return self::report();
             } catch (RuntimeException $e) {
-                return static::report(
+                return self::report(
                     new Phest_Exception($e->getMessage()),
-                    static::getLine("assertThat")
+                    self::getLine("assertThat")
                 );
             }
         }
     }
+?>

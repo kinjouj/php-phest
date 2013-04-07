@@ -1,4 +1,5 @@
 <?php
+    require_once 'Phest.php';
     require_once dirname(__FILE__).'/class.php';
 
     class Phest_TestCase extends TestCase {

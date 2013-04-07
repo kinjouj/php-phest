@@ -1,7 +1,8 @@
 <?php
+    require_once 'Console/Color2.php';
+    require_once dirname(__FILE__).'/../Context.php';
     require_once dirname(__FILE__).'/../Exception.php';
     require_once dirname(__FILE__).'/../Report.php';
-    require_once 'Console/Color2.php';
 
     class Phest_Report_Console extends Phest_Report {
 
